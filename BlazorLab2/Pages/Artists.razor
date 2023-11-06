@@ -1,0 +1,53 @@
+﻿@page "/Artists"
+@using BlazorLab2.Data
+@inject ArtistService artistService
+@inject AlbumService albumService
+@inject NavigationManager NavigationManager
+
+
+<h3>Artists</h3>
+
+<a href="AddArtist" class="button">Add new artist</a>
+
+@if (artistsList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Albums</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var artist in artistsList)
+            {
+                <tr>
+                    <td>@artist.Name</td>
+                    <td>@artist.Country</td>
+                    <td>
+                        @foreach (var album in artist.Albums)
+                        {
+                            @album.Title<br />
+                        }
+                    </td>
+                    <td>
+                        <button @onclick="()=>DeleteArtist(artist.Id)" class="delete-button">
+                           Delete
+                        </button>
+                    </td>
+                    <td><a href="EditArtist/@artist.Id" class="button">Edit</a></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

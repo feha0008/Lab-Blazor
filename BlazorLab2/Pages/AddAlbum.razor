@@ -1,0 +1,23 @@
+﻿@page "/AddAlbum"
+@using BlazorLab2.Data
+@inject ArtistService artistService
+@inject AlbumService albumService
+@inject NavigationManager NavigationManager
+
+<h3>Add new Album</h3>
+<div>
+    <EditForm Model="@album" OnSubmit="@AddNewAlbum">
+        <label class="small-title">Title</label><br />
+        <InputText @bind-Value="album.Title" /><br />
+        <label class="small-title">Year</label><br />
+        <input @bind="album.Year" /><br />
+        <label class="small-title">Add an artist</label><br />
+        <select class="form-control selectpicker selectField" @bind="album.ArtistId">
+            @foreach (var item in artists)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select><br />
+        <button class="save-button" type="submit">Save</button>
+    </EditForm>
+</div>

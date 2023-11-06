@@ -1,0 +1,43 @@
+﻿@page "/Albums"
+@using BlazorLab2.Data
+@inject AlbumService albumService
+@inject NavigationManager NavigationManager
+
+<h3>Albums</h3>
+
+<a href="AddAlbum" class="button">Add new album</a>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Artist</th>
+            <th>Action</th> <!-- Add a column for the delete button -->
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var album in albumsList)
+        {
+            <tr>
+                <td>@album.Title</td>
+                <td>@album.Year</td>
+                <td>
+                    @foreach (var artist in album.Artists)
+                    {
+                        @artist.Name<br />
+                    }
+                </td>
+                <td>
+                    <button @onclick="()=>DeleteAlbum(album.Id)" class="delete-button">Delete</button>
+                </td>
+                <td><a href="EditAlbum/@album.Id" class="button">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

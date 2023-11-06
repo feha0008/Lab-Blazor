@@ -1,0 +1,19 @@
+﻿@page "/callAPI"
+@using BlazorLab2.Data
+@using BlazorLab2.Models
+@inject GenreService genreService
+
+<div class="card">
+    <div class="information-card">
+<h1>Music genres</h1>
+<p class="descriptive-text">Music is a vast and ever-evolving art form, with a myriad of genres that continue to surprise and captivate us. While we are familiar with well-known genres like rock, pop, hip-hop, and classical, there exists a vast musical universe beyond our awareness. On this page you can discover new obscure genres you didn't know about. Just press the button below and you will learn something new.</p>
+</div>
+@*when clicked, gets a list of 5 genres randomly genreted*@
+<button class="genre-button" @onclick="GetRandomGenres" >Get Random Genres</button>
+
+@foreach (var genre in genres)
+{
+    <p class="small-text">@genre</p>
+}
+
+</div>

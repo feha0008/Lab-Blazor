@@ -1,0 +1,57 @@
+﻿@page "/EditAlbum/{Id:int}"
+@using BlazorLab2.Data
+@using BlazorLab2.Models
+@inject AlbumService albumService
+@inject ArtistService artistService
+@inject NavigationManager NavigationManager
+
+<h3>Edit albums: @album.Title</h3>
+
+
+<div class="size">
+    <EditForm Model="@album" OnSubmit="()=>UpdateAlbum()">
+        <label class="small-title">Title</label><br />
+        <InputText @bind-Value="album.Title" /><br />
+        <br />
+        <label class="small-title">Year</label><br />
+        <input @bind="album.Year" /><br />
+        <br />
+        <label class="small-title">Add an artist</label><br />
+        <select class="form-control selectpicker padding" @bind="album.ArtistId">
+
+            @foreach (var item in artists)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+        <br />
+        <button class="save-button" type="submit">Save</button>
+        <br />
+        <br />
+        <label class="small-title">Artist</label>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Country</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var artist in album.Artists)
+                {
+                    <tr>
+                        <td>@artist.Name</td>
+                        <td>@artist.Country</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+
+    </EditForm>
+</div>
+
+

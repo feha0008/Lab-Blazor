@@ -1,0 +1,53 @@
+﻿@page "/Instruments"
+@using BlazorLab2.Data
+@inject InstrumentService instrumentService
+
+@inject NavigationManager NavigationManager
+
+
+<h3>Intruments</h3>
+
+
+<div>
+    <p class="small-title">Add instrument</p>
+    <EditForm Model="@instrument" OnSubmit="@AddNewInstrument">
+        <label>Instrument</label><br />
+        <InputText @bind-Value="instrument.InstrumentName" /><br />
+        <label>Catagory</label><br />
+        <InputText @bind-Value="instrument.Category" /><br />
+        <br />
+        <button class="save-button" type="submit">Save</button>
+    </EditForm>
+</div>
+
+
+
+@if (instrumentsList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Instrument</th>
+                <th>Catagory</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var instrument in instrumentsList)
+            {
+                <tr>
+                    <td>@instrument.InstrumentName</td>
+                    <td>@instrument.Category</td>
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
